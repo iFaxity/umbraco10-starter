@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{FDD0D6F6-F49F-4E3F-A5A8-43886B20514B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		global.json = global.json
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6D982B7E-9EC7-4463-BA24-40CDCA048C0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guttew.Umbraco", "src\Guttew.Umbraco\Guttew.Umbraco.csproj", "{10FA2B70-FFE6-420F-B3D4-438CEA1614C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbracoWebsite.Core", "src\UmbracoWebsite.Core\UmbracoWebsite.Core.csproj", "{70922CAE-60AF-4A29-9F6E-A95B01DB330F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbracoWebsite.Models", "src\UmbracoWebsite.Models\UmbracoWebsite.Models.csproj", "{19258F5B-E0C0-4C36-81AE-5F9365F839DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbracoWebsite.Site", "src\UmbracoWebsite.Site\UmbracoWebsite.Site.csproj", "{CC4051A9-3E1E-472E-9504-67F6A68546EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F90205E-1614-431F-B12C-DF966B2857D6}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10FA2B70-FFE6-420F-B3D4-438CEA1614C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10FA2B70-FFE6-420F-B3D4-438CEA1614C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10FA2B70-FFE6-420F-B3D4-438CEA1614C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10FA2B70-FFE6-420F-B3D4-438CEA1614C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70922CAE-60AF-4A29-9F6E-A95B01DB330F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70922CAE-60AF-4A29-9F6E-A95B01DB330F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70922CAE-60AF-4A29-9F6E-A95B01DB330F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70922CAE-60AF-4A29-9F6E-A95B01DB330F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19258F5B-E0C0-4C36-81AE-5F9365F839DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19258F5B-E0C0-4C36-81AE-5F9365F839DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19258F5B-E0C0-4C36-81AE-5F9365F839DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19258F5B-E0C0-4C36-81AE-5F9365F839DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC4051A9-3E1E-472E-9504-67F6A68546EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4051A9-3E1E-472E-9504-67F6A68546EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4051A9-3E1E-472E-9504-67F6A68546EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4051A9-3E1E-472E-9504-67F6A68546EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10FA2B70-FFE6-420F-B3D4-438CEA1614C8} = {6D982B7E-9EC7-4463-BA24-40CDCA048C0B}
+		{70922CAE-60AF-4A29-9F6E-A95B01DB330F} = {6D982B7E-9EC7-4463-BA24-40CDCA048C0B}
+		{19258F5B-E0C0-4C36-81AE-5F9365F839DB} = {6D982B7E-9EC7-4463-BA24-40CDCA048C0B}
+		{CC4051A9-3E1E-472E-9504-67F6A68546EA} = {6D982B7E-9EC7-4463-BA24-40CDCA048C0B}
+	EndGlobalSection
+EndGlobal

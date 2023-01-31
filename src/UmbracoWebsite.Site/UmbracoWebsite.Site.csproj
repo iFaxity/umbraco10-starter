@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Required to publish with the Generated Razor files -->
+    <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
+    <!-- Set this to true if ModelsBuilder mode is not InMemoryAuto-->
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
+    <RazorCompileOnPublish>false</RazorCompileOnPublish>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="web.Release.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="web.Release.config" />
+  </ItemGroup>
+
+  <!-- Force windows to use ICU. Otherwise Windows 10 2019H1+ will do it, but older windows 10 and most if not all winodws servers will run NLS -->
+  <ItemGroup>
+    <PackageReference Include="Joonasw.AspNetCore.SecurityHeaders" Version="4.0.1" />
+    <PackageReference Include="SeoToolkit.Umbraco" Version="2.2.1" />
+    <PackageReference Include="Umbraco.Cms" Version="10.4.0" />
+    <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="68.2.0.9" />
+    <PackageReference Include="uSync" Version="10.3.2" />
+    <ProjectReference Include="..\Guttew.Umbraco\Guttew.Umbraco.csproj" />
+    <ProjectReference Include="..\UmbracoWebsite.Core\UmbracoWebsite.Core.csproj" />
+    <ProjectReference Include="..\UmbracoWebsite.Models\UmbracoWebsite.Models.csproj" />
+    <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="68.2.0.9" Condition="$(RuntimeIdentifier.StartsWith('linux')) Or $(RuntimeIdentifier.StartsWith('win')) Or ('$(RuntimeIdentifier)' == '' And !$([MSBuild]::IsOSPlatform('osx')))" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App_Plugins\" />
+    <Folder Include="uSync\v10" />
+    <Folder Include="Views\Partials\blocklist" />
+    <Folder Include="Views\Partials\Icons" />
+    <Folder Include="wwwroot\dist" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec Command="npm install" />
+  </Target>
+
+  <Target Name="BuildStaticFiles" BeforeTargets="Build" AfterTargets="DebugEnsureNodeEnv" Condition=" '$(Configuration)' == 'Debug' ">
+    <!-- Ensure Static files are built in dev -->
+    <Exec Command="npm run build:dev" />
+  </Target>
+
+  <Target Name="PublishRunNpm" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec Command="npm install" />
+    <Exec Command="npm run build:prod" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+</Project>

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Menu\**" />
+    <Compile Remove="FolderList\**" />
+    <Compile Remove="MenuList\**" />
+    <Compile Remove="QueryString\QueryStringBuilderBase.cs" />
+    <Compile Remove="QueryString\QueryStringBuilder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Menu\**" />
+    <EmbeddedResource Remove="FolderList\**" />
+    <EmbeddedResource Remove="MenuList\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Menu\**" />
+    <None Remove="FolderList\**" />
+    <None Remove="MenuList\**" />
+  </ItemGroup>
+
+</Project>

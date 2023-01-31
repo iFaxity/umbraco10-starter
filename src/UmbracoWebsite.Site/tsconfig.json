@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "esnext",
+        "lib": [ "esnext", "dom" ],
+        "allowJs": true,
+        "outDir": "./wwroot/dist/Scripts",
+        "noEmit": true,
+        "strict": true,
+        /* Module Resolution Options */
+        "moduleResolution": "node",
+        "types": [ "node", "vite/client"],
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        /* Advanced Options */
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "./Assets/Scripts",
+        "./Assets/Scripts/types.d.ts",
+        "./vite.config.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

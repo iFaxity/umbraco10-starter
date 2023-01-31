@@ -1,0 +1,142 @@
+/**
+ * This injects Tailwind's base styles and any base styles registered by
+ * plugins.
+ */
+@import 'tailwindcss/base';
+
+/**
+ * This injects Tailwind's component classes and any component classes
+ * registered by plugins.
+ */
+@import 'tailwindcss/components';
+
+/*
+ * Custom components declared before utilities and screens to
+ * respect utility directives
+ */
+@import 'plyr/dist/plyr.css';
+
+/**
+ * This injects Tailwind's utility classes and any utility classes registered
+ * by plugins.
+ */
+@import 'tailwindcss/utilities';
+
+/**
+ * Use this directive to control where Tailwind injects the responsive
+ * variations of each utility.
+ *
+ * If omitted, Tailwind will append these classes to the very end of
+ * your stylesheet by default.
+ */
+@import 'tailwindcss/variants';
+
+@layer components {
+    .ch_header {
+        @apply text-2xl md:text-3xl lg:text-4xl font-light mb-2 xl:mb-4;
+    }
+
+    .ch_lorem {
+        @apply prose prose-slate lg:prose-lg;
+    }
+
+    .ch_banner {
+        @apply py-8;
+    }
+
+        .ch_banner img {
+            @apply rounded-sm;
+        }
+
+    .ch_newSpo a {
+        @apply inline-block rounded-sm border-2 border-secondary font-bold text-secondary px-8 py-4 mb-2 transition-colors duration-200 hover:underline hover:bg-secondary hover:text-white;
+    }
+
+    .ch_searchblock {
+        @apply mb-8;
+    }
+
+        .ch_searchblock input {
+            @apply border border-secondary-dark rounded-sm px-4 py-4 w-full max-w-lg mr-2 focus:outline-0;
+        }
+
+    .ch_searchJobs {
+        @apply relative text-lg -left-[40px];
+    }
+
+    .ch_joblist {
+        @apply flex flex-col space-y-4 lg:space-y-8 mb-8;
+    }
+
+    .ch_jobitem {
+        @apply border-b pb-4;
+    }
+
+    .ch_jobitem2 {
+        @apply text-secondary text-lg font-bold hover:underline;
+    }
+
+    .minisocial {
+        @apply flex gap-4;
+    }
+
+        .minisocial a {
+            @apply px-2 py-1 rounded-sm text-white;
+        }
+
+    .linmini a {
+        @apply bg-[#0e76a8];
+    }
+
+    .twittermini a {
+        @apply bg-[#00acee];
+    }
+
+    .gplusmini {
+        @apply hidden;
+    }
+
+    #ch_root .hidden2 {
+        @apply hidden;
+    }
+
+    .ch_more-results {
+        @apply flex justify-center mb-8;
+    }
+
+        .ch_more-results a {
+            @apply inline-block rounded-sm border-2 border-secondary font-bold text-secondary px-8 py-4 hover:underline;
+        }
+
+    #ch_poweredby {
+        @apply text-right text-secondary hover:underline;
+    }
+
+    #ch_root .ch_newSpo {
+        @apply hidden;
+    }
+
+    details > summary svg {
+        @apply transition-transform;
+    }
+
+    details[open] > summary svg {
+        @apply rotate-90;
+    }
+}
+
+@layer components {
+    /* Plyr YouTube iFrame fix */
+    .plyr iframe[id^=youtube] {
+        top: -50%;
+        height: 200%;
+    }
+
+    .plyr__hero .plyr__poster {
+        background-size: cover;
+    }
+
+    /*.plyr__hero .plyr {
+        @apply max-h-screen h-full w-full;
+    }*/
+}
