@@ -1,6 +1,6 @@
 using Umbraco.Cms.Core.Models.PublishedContent;
 
-namespace Advania.Optimizely.FolderList
+namespace Guttew.Umbraco.FolderList
 {
     public static class FolderListExtensions
     {

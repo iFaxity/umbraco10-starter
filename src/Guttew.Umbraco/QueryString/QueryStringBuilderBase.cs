@@ -1,10 +1,10 @@
 ﻿using System.Web;
-using Advania.Optimizely.Extensions;
+using Guttew.Umbraco.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Primitives;
 
-namespace Advania.Optimizely.QueryString;
+namespace Guttew.Umbraco.QueryString;
 
 /// <summary>
 ///     Helper class for creating and modifying URL's QueryString.

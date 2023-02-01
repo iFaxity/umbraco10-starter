@@ -1,6 +1,6 @@
 ﻿using Umbraco.Cms.Core.Models.PublishedContent;
 
-namespace Advania.Optimizely.MenuList;
+namespace Guttew.Umbraco.MenuList;
 
 /// <summary>
 /// Class to represent each item in a menu list.

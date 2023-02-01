@@ -1,13 +1,13 @@
 ﻿using System.Text.Encodings.Web;
 using System.Web;
-using Advania.Optimizely.Extensions;
+using Guttew.Umbraco.Extensions;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.WebUtilities;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Extensions;
 
-namespace Advania.Optimizely.QueryString
+namespace Guttew.Umbraco.QueryString
 {
     /// <summary>
     ///     Helper class for creating and modifying URL's QueryString.

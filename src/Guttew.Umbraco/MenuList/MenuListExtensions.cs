@@ -1,7 +1,7 @@
 ﻿using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Extensions;
 
-namespace Advania.Optimizely.MenuList;
+namespace Guttew.Umbraco.MenuList;
 
 public static class MenuListExtensions
 {
