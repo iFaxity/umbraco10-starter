@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿using Guttew.Umbraco.Mvc;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Core.Models.Blocks;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -22,8 +23,11 @@ public static class HtmlExtensions
         IBlockReference<IPublishedElement, IPublishedElement> currentBlock,
         string? tag = null)
     {
-        // TODO: Add more optional parameters
-        return helper.InvokeAsync(currentBlock.Content.ContentType.Alias, new
+        // TODO Move this to a helper?
+        var modelAlias = currentBlock.Content.ContentType.Alias;
+        var componentName = $"{BlockComponentAttribute.ComponentPrefix}_{modelAlias}";
+
+        return helper.InvokeAsync(componentName, new
         {
             currentBlock,
             tag,

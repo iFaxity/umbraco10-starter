@@ -5,7 +5,7 @@ using Models = Umbraco.Cms.Web.Common.PublishedModels;
 
 namespace UmbracoWebsite.Core.StandardBlock;
 
-[ViewComponent(Name = "standardBlock")]
+[BlockComponent(typeof(Models.StandardBlock))]
 public class StandardBlockComponent : BlockComponent<Models.StandardBlock, StandardBlockViewModel>
 {
     protected override IViewComponentResult InvokeComponent(StandardBlockViewModel viewModel)

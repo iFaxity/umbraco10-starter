@@ -35,7 +35,6 @@
   <ItemGroup>
     <Folder Include="App_Plugins\" />
     <Folder Include="uSync\v10" />
-    <Folder Include="Views\Partials\blocklist" />
     <Folder Include="Views\Partials\Icons" />
     <Folder Include="wwwroot\dist" />
   </ItemGroup>

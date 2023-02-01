@@ -3,6 +3,7 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Guttew.Umbraco.Mvc;
 
+[NonViewComponent]
 public abstract class BlockComponentBase<TViewModel> : ViewComponent
 {
     protected string? Tag { get; private set; }
