@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.ComponentModel;
 
-namespace Guttew.Optimizely.Extensions;
+namespace Guttew.Umbraco.Extensions;
 
 public static class EnumerableExtensions
 {

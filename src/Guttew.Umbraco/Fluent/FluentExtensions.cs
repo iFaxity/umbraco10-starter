@@ -1,4 +1,4 @@
-﻿namespace Guttew.Optimizely.Fluent;
+﻿namespace Guttew.Umbraco.Fluent;
 
 public static class FluentExtensions
 {

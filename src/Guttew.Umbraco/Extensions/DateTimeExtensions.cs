@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace Guttew.Optimizely.Extensions;
+namespace Guttew.Umbraco.Extensions;
 
 public static class DateTimeExtensions
 {

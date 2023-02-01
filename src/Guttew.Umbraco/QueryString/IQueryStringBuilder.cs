@@ -1,4 +1,4 @@
-﻿namespace Guttew.Optimizely.QueryString;
+﻿namespace Guttew.Umbraco.QueryString;
 
 public interface IQueryStringBuilder
 {

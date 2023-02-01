@@ -1,6 +1,6 @@
 using System;
 
-namespace Guttew.Optimizely.QueryString
+namespace Guttew.Umbraco.QueryString
 {
     /// <summary>
     /// Extensions for QueryStringBuilderBase
