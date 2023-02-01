@@ -1,10 +1,10 @@
-﻿@inherits BasicViewPage
+﻿@inherits SiteViewPage
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-<html lang="@(Model.GetCultureInfo()?.TwoLetterISOLanguageName)" class="overflow-x-hidden">
+<html lang="@(Model.CurrentPage.GetCultureInfo()?.TwoLetterISOLanguageName)" class="overflow-x-hidden">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

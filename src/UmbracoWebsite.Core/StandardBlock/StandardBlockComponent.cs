@@ -12,6 +12,6 @@ public class StandardBlockComponent : BlockComponent<Models.StandardBlock, Stand
     {
         var culture = CurrentPage?.GetCultureFromDomains();
 
-        return View(viewModel);
+        return CurrentTemplate(viewModel);
     }
 }

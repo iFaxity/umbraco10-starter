@@ -12,11 +12,6 @@ public abstract class PageController<TPageData, TViewModel> : RenderController
         where TPageData : PublishedContentModel
         where TViewModel : IPageViewModel<TPageData>
 {
-    protected override TPageData? CurrentPage
-    {
-        get => (TPageData?)base.CurrentPage;
-    }
-
     public PageController(
         ILogger<RenderController> logger,
         ICompositeViewEngine compositeViewEngine,
@@ -25,14 +20,14 @@ public abstract class PageController<TPageData, TViewModel> : RenderController
     {
     }
 
-    public override IActionResult Index()
+    protected override TPageData? CurrentPage
     {
-        return View(CreateViewModel(CurrentPage));
+        get => (TPageData?)base.CurrentPage;
     }
 
-    protected virtual IActionResult View(TViewModel viewModel)
+    public override IActionResult Index()
     {
-        return CurrentTemplate(viewModel);
+        return CurrentTemplate(CreateViewModel(CurrentPage));
     }
 
     /// <summary>

@@ -18,10 +18,10 @@ public class StartPageController : PageController<StartPage, StartPageViewModel>
     {
     }
 
-    public override IActionResult Index()
+    public IActionResult Index()
     {
         var viewModel = CreateViewModel(CurrentPage);
 
-        return View(viewModel);
+        return CurrentTemplate(viewModel);
     }
 }
