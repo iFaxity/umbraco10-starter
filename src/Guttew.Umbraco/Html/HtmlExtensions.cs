@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Guttew.Umbraco.Mvc;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;

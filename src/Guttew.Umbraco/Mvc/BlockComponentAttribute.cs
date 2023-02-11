@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Guttew.Umbraco.Mvc;

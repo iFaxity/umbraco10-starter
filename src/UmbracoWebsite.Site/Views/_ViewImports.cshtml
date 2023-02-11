@@ -1,13 +1,21 @@
+@* Standard Umbraco imports *@
 @using Umbraco.Extensions
-@using UmbracoWebsite.Site
 @using Umbraco.Cms.Web.Common.PublishedModels
 @using Umbraco.Cms.Web.Common.Views
 @using Umbraco.Cms.Core.Models.PublishedContent
 @using Microsoft.AspNetCore.Html
+
+@* Imports from Guttew.Umbraco *@
 @using Guttew.Umbraco.Html
 @using Guttew.Umbraco.Accessibility
 @using Guttew.Umbraco.Icon
 @using Guttew.Umbraco.Extensions
+
+@* Project specific imports *@
+@using UmbracoWebsite.Site
+@using UmbracoWebsite.Core.Shared
+
+@* Register tag helpers and inject services *@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, Smidge
 @inject Smidge.SmidgeHelper SmidgeHelper

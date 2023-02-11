@@ -1,13 +1,13 @@
 ﻿@using Models = Umbraco.Cms.Web.Common.PublishedModels;
-@inherits BasicViewPage<Models.StartPage>
+@inherits SiteViewPage<Models.StartPage>
 @{
 	Layout = "~/Views/Layouts/_Site.cshtml";
 }
 
-<h2>@Model.Header</h2>
+<h2>@Model.CurrentPage.Header</h2>
 
 <ul>
-    @foreach (var tag in Model.Tags)
+    @foreach (var tag in Model.CurrentPage.Tags)
     {
         <li>@tag</li>
     }
