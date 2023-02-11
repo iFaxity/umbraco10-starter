@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Guttew.Umbraco.Extensions;
 
@@ -11,7 +12,7 @@ public static class EnumerableExtensions
     /// <typeparam name="T">The type of elements of the sequence.</typeparam>
     /// <param name="source">The <see cref="T:System.Collections.Generic.IEnumerable`1" /> to check.</param>
     /// <returns>Returns <code>true</code> if given sequence is null or is empty</returns>
-    public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+    public static bool IsNullOrEmpty<T>([NotNullWhen(false)] this IEnumerable<T>? source)
     {
         return source?.Any() != true;
     }
@@ -22,7 +23,7 @@ public static class EnumerableExtensions
     /// <typeparam name="T">The type of an item.</typeparam>
     /// <param name="source">The source sequence of items.</param>
     /// <param name="action">The action to apply on an item.</param>
-    public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+    public static void ForEach<T>(this IEnumerable<T>? source, Action<T> action)
     {
         if (IsNullOrEmpty(source))
             return;
@@ -37,7 +38,7 @@ public static class EnumerableExtensions
     /// <typeparam name="T">The type of an item.</typeparam>
     /// <param name="source">The source sequence of items.</param>
     /// <param name="action">The action to apply on an item passed along with the index of the item.</param>
-    public static void ForEach<T>(this IEnumerable<T> source, Action<int, T> action)
+    public static void ForEach<T>(this IEnumerable<T>? source, Action<int, T> action)
     {
         if (IsNullOrEmpty(source))
             return;
@@ -57,13 +58,12 @@ public static class EnumerableExtensions
     /// <returns>
     /// An <see cref="IEnumerable" /> that contains elements from the input sequence of type <typeparamref name="T" />.
     /// </returns>
-    public static IEnumerable<T> SafeOfType<T>(this IEnumerable source)
+    public static IEnumerable<T> SafeOfType<T>(this IEnumerable? source)
     {
         if (source == null)
             return Enumerable.Empty<T>();
 
-        return source.OfType<T>()
-            .OrEmptyIfNull();
+        return source.OfType<T>();
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public static class EnumerableExtensions
     /// <returns>
     /// An <see cref="IEnumerable" /> that contains elements from the input sequence of type <typeparamref name="T" /> or empty sequence.
     /// </returns>
-    public static IEnumerable<T> OrEmptyIfNull<T>(this IEnumerable<T> source)
+    public static IEnumerable<T> OrEmptyIfNull<T>(this IEnumerable<T>? source)
     {
         return source ?? Enumerable.Empty<T>();
     }

@@ -2,7 +2,8 @@
 
 namespace Guttew.Umbraco.Mvc;
 
-public interface IPageViewModel<out TPageData> where TPageData : IPublishedContent
+public interface IPageViewModel<out TPageData>
+    where TPageData : IPublishedContent
 {
     /// <summary>
     /// Gets the current page.

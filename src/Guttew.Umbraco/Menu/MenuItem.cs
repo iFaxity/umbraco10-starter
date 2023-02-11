@@ -1,6 +1,6 @@
 ﻿using Umbraco.Cms.Core.Models.PublishedContent;
 
-namespace Advania.Umbraco.Menu;
+namespace Guttew.Umbraco.Menu;
 
 public class MenuItem
 {

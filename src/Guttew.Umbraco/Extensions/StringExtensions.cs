@@ -9,7 +9,8 @@ namespace Guttew.Umbraco.Extensions;
 public static class StringExtensions
 {
     private const string Ellipsis = "…";
-    private static readonly Regex KEBAB_CASE_REGEX = new("(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z0-9])", RegexOptions.Compiled);
+    private static readonly Regex s_kebab_case_regex = new("(?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z0-9])", RegexOptions.Compiled);
+    private static readonly Regex s_newline_regex = new(@"\r?\n", RegexOptions.Compiled);
 
     /// <summary>
     ///     Returns a number of characters from the start of the string followed by a '...'.
@@ -178,7 +179,7 @@ public static class StringExtensions
         if (string.IsNullOrEmpty(value))
             return value;
 
-        return KEBAB_CASE_REGEX.Replace(value, "-$1")
+        return s_kebab_case_regex.Replace(value, "-$1")
             .Trim()
             .ToLower();
     }
@@ -190,10 +191,11 @@ public static class StringExtensions
     /// <returns></returns>
     public static string NewLineToBr(this string value)
     {
+        // TODO: make as IHtmlContent
         if (IsNullOrEmpty(value))
             return string.Empty;
 
-        return value.Replace(Environment.NewLine, "<br/>");
+        return s_newline_regex.Replace(value, "<br />");
     }
 
     /// <summary>

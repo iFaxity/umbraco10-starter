@@ -1,12 +1,19 @@
 ﻿using System.Globalization;
+using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Web.Common.DependencyInjection;
 using Umbraco.Extensions;
 
 namespace Guttew.Umbraco.Extensions;
 
 public static class ContentExtensions
 {
+    private static ILocalizationService? _localizationService;
+    private static ILocalizationService LocalizationService
+        => _localizationService ??= StaticServiceProvider.Instance.GetRequiredService<ILocalizationService>();
+
     /// <summary>
     /// Filters content which should not be visible to the user.
     /// </summary>
@@ -17,12 +24,49 @@ public static class ContentExtensions
         return source.Where(x => x.IsVisible() && x.IsPublished());
     }
 
-    public static CultureInfo? GetCultureInfo(this IPublishedContent content)
+    public static ILanguage? GetLanguage(this PublishedCultureInfo? publishedCulture)
+    {
+        return LocalizationService.GetLanguageByIsoCode(publishedCulture?.Culture);
+    }
+
+    /// <summary>
+    /// Parses the <see cref="PublishedCultureInfo"/> into a <seealso cref="CultureInfo"/>.
+    /// </summary>
+    /// <param name="publishedCulture"></param>
+    /// <returns></returns>
+    public static CultureInfo? GetCultureInfo(this PublishedCultureInfo? publishedCulture)
+    {
+        var culture = publishedCulture?.Culture;
+
+        if (culture is null)
+            return null;
+
+        try
+        {
+            return new CultureInfo(culture);
+        }
+        catch (CultureNotFoundException)
+        {
+            return null;
+        }
+    }
+
+    public static PublishedCultureInfo? GetCurrentCulture(this IPublishedContent content)
     {
         var culture = content.GetCultureFromDomains();
 
-        return culture is null
+        if (culture is null)
+            return null;
+
+        return !content.Cultures.TryGetValue(culture, out var publishedCulture)
             ? null
-            : new CultureInfo(culture);
+            : publishedCulture;
+    }
+
+    public static CultureInfo? GetCurrentCultureInfo(this IPublishedContent content)
+    {
+        var publishedCulture = GetCurrentCulture(content);
+
+        return GetCultureInfo(publishedCulture);
     }
 }

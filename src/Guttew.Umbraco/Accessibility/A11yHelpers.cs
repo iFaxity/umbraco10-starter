@@ -10,14 +10,20 @@ namespace Guttew.Umbraco.Accessibility;
 public static class A11yHelpers
 {
     #region A11yLink
-    public static IHtmlContent A11yLink(this IHtmlHelper helper, Link item)
-        => A11yLink(helper, item.Url, item.Name, item.Target);
+    public static IHtmlContent A11yLink(this IHtmlHelper helper, Link? item)
+    {
+        return A11yLink(helper, item?.Url, item?.Name, item?.Target);
+    }
 
-    public static IHtmlContent A11yLink(this IHtmlHelper helper, MediaWithCrops media, string? title = null, string? target = null)
-        => A11yLink(helper, media.MediaUrl(), title, target);
+    public static IHtmlContent A11yLink(this IHtmlHelper helper, MediaWithCrops? media, string? title = null, string? target = null)
+    {
+        return A11yLink(helper, media?.MediaUrl(), title, target);
+    }
 
-    public static IHtmlContent A11yLink(this IHtmlHelper helper, IPublishedContent content, string? title = null, string? target = null)
-        => A11yLink(helper, content.Url(), title, target);
+    public static IHtmlContent A11yLink(this IHtmlHelper helper, IPublishedContent? content, string? title = null, string? target = null)
+    {
+        return A11yLink(helper, content?.Url(), title, target);
+    }
 
     public static IHtmlContent A11yLink(this IHtmlHelper helper, string? href, string? title = null, string? target = null)
     {

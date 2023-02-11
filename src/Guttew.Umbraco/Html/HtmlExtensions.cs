@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿using System.Reflection;
+using Guttew.Umbraco.Mvc;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Core.Models.Blocks;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -22,12 +24,33 @@ public static class HtmlExtensions
         IBlockReference<IPublishedElement, IPublishedElement> currentBlock,
         string? tag = null)
     {
-        // TODO: Add more optional parameters
-        return helper.InvokeAsync(currentBlock.Content.ContentType.Alias, new
+        var type = GetBlockViewComponentType(currentBlock);
+
+        if (type is null)
+            throw new InvalidOperationException($"No BlockComponent found for block {currentBlock.Content.GetType()}");
+
+        return helper.InvokeAsync(type, new
         {
             currentBlock,
             tag,
         });
+    }
+
+    private static Type? GetBlockViewComponentType(IBlockReference<IPublishedElement, IPublishedElement> block)
+    {
+        // TODO Move this to a helper?
+        var modelAlias = block.Content.ContentType.Alias;
+
+        return AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(x => x.GetTypes())
+            .Where(x => x.IsSubclassOf(typeof(ViewComponent)))
+            .Where(x =>
+            {
+                var attr = x.GetCustomAttribute<BlockComponentAttribute>();
+
+                return attr?.Name == modelAlias;
+            })
+            .FirstOrDefault();
     }
 
     private static async Task<IHtmlContent> GetBlockComponentsHtmlAsync(

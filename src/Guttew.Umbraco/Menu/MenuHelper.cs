@@ -1,10 +1,9 @@
-﻿
-using Microsoft.AspNetCore.Html;
+﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Extensions;
 
-namespace Advania.Umbraco.Menu;
+namespace Guttew.Umbraco.Menu;
 
 public static class MenuHelper
 {

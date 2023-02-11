@@ -3,7 +3,7 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Web.Common.PublishedModels;
 using Umbraco.Extensions;
 
-namespace Advania.Umbraco.Menu;
+namespace Guttew.Umbraco.Menu;
 
 [ViewComponent(Name = "FullMenu")]
 public class FullMenuViewComponent : ViewComponent
