@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Web;
 
 namespace Guttew.Umbraco.Mvc;
 
@@ -7,18 +10,40 @@ public abstract class BlockComponentBase<TBlockData, TViewModel> : ViewComponent
     where TBlockData : IPublishedElement
     where TViewModel : IBlockViewModel<TBlockData>
 {
+    // TODO: Not sure if caching of UmbracoContext is necessary
+    private IUmbracoContext? _umbracoContext;
+
+    protected IUmbracoContext? UmbracoContext
+    {
+        get
+        {
+            if (_umbracoContext is null)
+            {
+                var umbracoContextAccessor = HttpContext.RequestServices.GetRequiredService<IUmbracoContextAccessor>();
+
+                if (umbracoContextAccessor.TryGetUmbracoContext(out var umbracoContext))
+                    _umbracoContext = umbracoContext;
+            }
+
+            return _umbracoContext;
+        }
+    }
+
     protected string? Tag { get; private set; }
 
     protected IPublishedContent? CurrentPage { get; private set; }
 
     internal void Init(string? tag)
     {
-        // Set tag
         Tag = tag;
 
-        // Load the CurrentPage from the ViewData
-        if (ViewData.Model is IPublishedContent currentPage)
-            CurrentPage = currentPage;
+        // Resolve the current page
+        CurrentPage = ViewData.Model switch
+        {
+            IPublishedContent content => content,
+            IContentModel model => model.Content,
+            _ => UmbracoContext?.PublishedRequest?.PublishedContent,
+        };
     }
 
     /// <summary>

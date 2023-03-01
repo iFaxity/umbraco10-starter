@@ -18,9 +18,11 @@ public static class UmbracoHelperExtensions
         if (culture is null)
             return null;
 
-        var item = LocalizationService.GetDictionaryItemByKey(key);
+        var dictItem = LocalizationService.GetDictionaryItemByKey(key);
 
-        var translation = item?.Translations.FirstOrDefault(x => culture.Equals(x.Language?.IsoCode, StringComparison.InvariantCultureIgnoreCase));
+        var translation = dictItem?.Translations
+            .Where(x => culture.Equals(x.Language?.IsoCode, StringComparison.InvariantCultureIgnoreCase))
+            .FirstOrDefault();
 
         return translation?.Value;
     }
@@ -35,10 +37,13 @@ public static class UmbracoHelperExtensions
         if (cultureInfo is null)
             return null;
 
-        var item = LocalizationService.GetDictionaryItemByKey(key);
+        var dictItem = LocalizationService.GetDictionaryItemByKey(key);
 
-        var translation = item?.Translations.FirstOrDefault(x => cultureInfo.Equals(x.Language?.CultureInfo));
+        var translation = dictItem?.Translations
+            .Where(x => cultureInfo.Equals(x.Language?.CultureInfo))
+            .FirstOrDefault();
 
         return translation?.Value;
     }
 }
+

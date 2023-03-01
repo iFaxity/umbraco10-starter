@@ -67,20 +67,6 @@ public static class EnumerableExtensions
     }
 
     /// <summary>
-    /// Returns empty sequence if source sequence is null otherwise returns source sequence.
-    /// NOTE: Helper extension to work with legacy APIs which might return null references of IEnumerable.
-    /// </summary>
-    /// <typeparam name="T">The type of elements of the sequence.</typeparam>
-    /// <param name="source">The <see cref="IEnumerable" /> to check.</param>
-    /// <returns>
-    /// An <see cref="IEnumerable" /> that contains elements from the input sequence of type <typeparamref name="T" /> or empty sequence.
-    /// </returns>
-    public static IEnumerable<T> OrEmptyIfNull<T>(this IEnumerable<T>? source)
-    {
-        return source ?? Enumerable.Empty<T>();
-    }
-
-    /// <summary>
     /// Filters by page and page size.
     /// </summary>
     /// <param name="source">The source.</param>

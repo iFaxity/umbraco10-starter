@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using Guttew.Umbraco.Mvc;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Guttew.Umbraco.Html;
 
-public static class HtmlExtensions
+public static class BlockComponentHelper
 {
     public static Task<IHtmlContent> GetBlockGridComponentsHtmlAsync(this IViewComponentHelper helper, BlockGridModel model, string? tag = null)
     {
@@ -58,17 +58,16 @@ public static class HtmlExtensions
         IEnumerable<IBlockReference<IPublishedElement, IPublishedElement>> blocks,
         string? tag)
     {
-        var builder = new HtmlContentBuilder();
+        IHtmlContentBuilder builder = new HtmlContentBuilder();
 
-        foreach (var currentBlock in blocks)
+        foreach (var block in blocks)
         {
-            if (currentBlock?.Content is null)
+            if (block?.Content is null)
                 continue;
 
-            // TODO: Add more optional parameters
-            var content = await GetBlockComponentHtmlAsync(helper, currentBlock, tag);
+            var content = await GetBlockComponentHtmlAsync(helper, block, tag);
 
-            builder.AppendHtml(content);
+            builder = builder.AppendHtml(content);
         }
 
         return builder;

@@ -8,6 +8,7 @@ using Umbraco.Extensions;
 
 namespace Guttew.Umbraco.Extensions;
 
+
 public static class ContentExtensions
 {
     private static ILocalizationService? _localizationService;
@@ -24,6 +25,7 @@ public static class ContentExtensions
         return source.Where(x => x.IsVisible() && x.IsPublished());
     }
 
+
     public static ILanguage? GetLanguage(this PublishedCultureInfo? publishedCulture)
     {
         return LocalizationService.GetLanguageByIsoCode(publishedCulture?.Culture);
@@ -36,19 +38,7 @@ public static class ContentExtensions
     /// <returns></returns>
     public static CultureInfo? GetCultureInfo(this PublishedCultureInfo? publishedCulture)
     {
-        var culture = publishedCulture?.Culture;
-
-        if (culture is null)
-            return null;
-
-        try
-        {
-            return new CultureInfo(culture);
-        }
-        catch (CultureNotFoundException)
-        {
-            return null;
-        }
+        return ParseCultureInfo(publishedCulture?.Culture);
     }
 
     public static PublishedCultureInfo? GetCurrentCulture(this IPublishedContent content)
@@ -58,9 +48,10 @@ public static class ContentExtensions
         if (culture is null)
             return null;
 
-        return !content.Cultures.TryGetValue(culture, out var publishedCulture)
-            ? null
-            : publishedCulture;
+        if (!content.Cultures.TryGetValue(culture, out var publishedCulture))
+            return null;
+
+        return publishedCulture;
     }
 
     public static CultureInfo? GetCurrentCultureInfo(this IPublishedContent content)
@@ -68,5 +59,24 @@ public static class ContentExtensions
         var publishedCulture = GetCurrentCulture(content);
 
         return GetCultureInfo(publishedCulture);
+    }
+
+    private static CultureInfo? ParseCultureInfo(string? culture)
+    {
+        CultureInfo? cultureInfo = null;
+
+        if (culture is not null)
+        {
+            try
+            {
+                cultureInfo = new CultureInfo(culture);
+            }
+            catch (CultureNotFoundException)
+            {
+                // ignore
+            }
+        }
+
+        return cultureInfo;
     }
 }

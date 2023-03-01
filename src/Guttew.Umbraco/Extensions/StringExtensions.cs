@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Html;
 
 namespace Guttew.Umbraco.Extensions;
 
@@ -189,13 +190,14 @@ public static class StringExtensions
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns></returns>
-    public static string NewLineToBr(this string value)
+    public static IHtmlContent NewLineToBr(this string value)
     {
-        // TODO: make as IHtmlContent
         if (IsNullOrEmpty(value))
-            return string.Empty;
+            return HtmlString.Empty;
 
-        return s_newline_regex.Replace(value, "<br />");
+        var text = s_newline_regex.Replace(value, "<br />");
+
+        return new HtmlString(text);
     }
 
     /// <summary>

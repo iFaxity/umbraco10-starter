@@ -19,12 +19,12 @@
                 {
                     @await Component.GetBlockComponentHtmlAsync(item)
                 }
-                catch (InvalidOperationException)
+                catch (Exception exception)
                 {
                     <p>
                         <strong>Could not render component of type: @(item.Content.ContentType.Alias)</strong>
-                        <br/>
-                        This likely happened because the block component <em>@item.Content.ContentType.Alias</em> could not be found.
+                        <br />
+                        <pre>@exception.ToString()</pre>
                     </p>
                 }
             }

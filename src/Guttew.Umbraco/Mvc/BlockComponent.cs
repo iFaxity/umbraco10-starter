@@ -43,3 +43,4 @@ public abstract class BlockComponent<TBlockData, TSettingsData, TViewModel> : Bl
         return InvokeComponentAsync(viewModel);
     }
 }
+

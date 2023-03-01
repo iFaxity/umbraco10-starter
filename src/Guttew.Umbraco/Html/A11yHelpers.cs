@@ -1,28 +1,29 @@
-﻿using System.Web;
+using System.Web;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Extensions;
 
-namespace Guttew.Umbraco.Accessibility;
+namespace Guttew.Umbraco.Html;
+
 
 public static class A11yHelpers
 {
     #region A11yLink
     public static IHtmlContent A11yLink(this IHtmlHelper helper, Link? item)
     {
-        return A11yLink(helper, item?.Url, item?.Name, item?.Target);
+        return helper.A11yLink(item?.Url, item?.Name, item?.Target);
     }
 
     public static IHtmlContent A11yLink(this IHtmlHelper helper, MediaWithCrops? media, string? title = null, string? target = null)
     {
-        return A11yLink(helper, media?.MediaUrl(), title, target);
+        return helper.A11yLink(media?.MediaUrl(), title, target);
     }
 
     public static IHtmlContent A11yLink(this IHtmlHelper helper, IPublishedContent? content, string? title = null, string? target = null)
     {
-        return A11yLink(helper, content?.Url(), title, target);
+        return helper.A11yLink(content?.Url(), title, target);
     }
 
     public static IHtmlContent A11yLink(this IHtmlHelper helper, string? href, string? title = null, string? target = null)
@@ -45,19 +46,19 @@ public static class A11yHelpers
             attributes.Add("rel", "noopener noreferrer");
         }
 
-        return MapAttributes(helper, attributes);
+        return helper.MapAttributes(attributes);
     }
     #endregion
 
     #region A11yCardLink
     public static IHtmlContent A11yCardLink(this IHtmlHelper helper, Link item)
-        => A11yLink(helper, item.Url, item.Name, item.Target);
+        => helper.A11yLink(item.Url, item.Name, item.Target);
 
     public static IHtmlContent A11yCardLink(this IHtmlHelper helper, MediaWithCrops media, string? title = null, string? target = null)
-        => A11yLink(helper, media.MediaUrl(), title, target);
+        => helper.A11yLink(media.MediaUrl(), title, target);
 
     public static IHtmlContent A11yCardLink(this IHtmlHelper helper, IPublishedContent content, string? title = null, string? target = null)
-        => A11yLink(helper, content.Url(), title, target);
+        => helper.A11yLink(content.Url(), title, target);
 
     public static IHtmlContent A11yCardLink(this IHtmlHelper helper, string href, string? title = null, string? target = null)
     {
@@ -75,7 +76,7 @@ public static class A11yHelpers
         if (!string.IsNullOrEmpty(target))
             attributes.Add("data-target", target);
 
-        return MapAttributes(helper, attributes);
+        return helper.MapAttributes(attributes);
     }
     #endregion
 
@@ -90,7 +91,7 @@ public static class A11yHelpers
         foreach (var prop in props)
         {
             var value = prop.GetValue(obj, null);
-            if (value != null)
+            if (value is not null)
             {
                 if (builder.Count == 0)
                     builder.Append(" ");
@@ -113,7 +114,7 @@ public static class A11yHelpers
         {
             var key = pair.Key?.ToString();
 
-            if (pair.Value != null && !string.IsNullOrEmpty(key))
+            if (pair.Value is not null && !string.IsNullOrEmpty(key))
             {
                 if (builder.Count == 0)
                     builder.Append(" ");
